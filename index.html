@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ser-Cars Araç Kiralama</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('arac.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50% 50%;
+      background-attachment: scroll;
+      color: #fff;
+      text-align: center;
+      transition: background-position 0.1s ease-out;
+    }
+
+    .banner {
+      background-color: rgba(240, 125, 0, 0.85);
+      padding: 40px 20px;
+      font-size: 32px;
+      font-weight: bold;
+      color: #fff;
+      border-bottom: 5px solid #000;
+    }
+
+    .banner span {
+      display: block;
+    }
+
+    .container {
+      padding: 30px 20px;
+      background-color: rgba(0,0,0,0.55);
+      border-radius: 10px;
+      max-width: 900px;
+      margin: 30px auto;
+      text-shadow:
+        1px 1px 0 #000,
+        2px 2px 0 #000,
+        3px 3px 0 #000;
+    }
+
+    h1, h2, h3, p, li, a, span {
+      text-shadow:
+        1px 1px 0 #000,
+        2px 2px 0 #444,
+        3px 3px 0 #777;
+    }
+
+    .car-img {
+      display: none;
+    }
+
+    .section-title {
+      font-size: 26px;
+      margin: 30px 0 15px;
+      color: #f07d00;
+      font-weight: bold;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      font-size: 18px;
+    }
+
+    ul li {
+      margin: 10px 0;
+      color: #fff;
+    }
+
+    .business-card-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .business-card-image {
+      max-width: 300px;
+      height: auto;
+      cursor: zoom-in;
+      border-radius: 10px;
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      transition: transform 0.3s ease;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .contact-section {
+      background-color: rgba(240, 125, 0, 0.85);
+      padding: 30px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-top: 5px solid #000;
+      max-width: 1100px;
+      margin: 0 auto 50px auto;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+
+    .contact-info {
+      flex: 1;
+      min-width: 250px;
+      text-align: left;
+      color: #fff;
+    }
+
+    .contact-info h2 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .contact-info a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      margin: 8px 0;
+      font-weight: bold;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+    .contact-info a:hover {
+      color: #000;
+      text-shadow: none;
+    }
+
+    .logo {
+      max-width: 120px;
+      height: auto;
+      margin-left: 20px;
+    }
+
+    .whatsapp-bubble {
+      background-color: #25D366;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      position: relative;
+      margin-right: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .whatsapp-bubble::after {
+      content: "";
+      position: absolute;
+      left: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 10px solid transparent;
+      border-right-color: #25D366;
+    }
+
+    .footer {
+      background-color: #000;
+      color: #f07d00;
+      text-align: center;
+      padding: 12px 0;
+      font-size: 14px;
+      border-top: 2px solid #f07d00;
+      user-select: none;
+    }
+
+    .contact-top-left {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: rgba(240, 125, 0, 0.9);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10000;
+      transition: background-color 0.3s ease;
+    }
+    .contact-top-left:hover {
+      background-color: #f07d00;
+    }
+
+    .down-arrow {
+      width: 14px;
+      height: 14px;
+      fill: white;
+      transition: transform 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .business-card-section,
+      .contact-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .logo {
+        margin-top: 20px;
+      }
+
+      .whatsapp-bubble {
+        margin: 20px 0 10px;
+      }
+
+      .contact-info {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contact-top-left" id="contactTopLeft">
+    İletişim
+    <svg class="down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M7 10l5 5 5-5H7z"/>
+    </svg>
+  </div>
+
+  <div class="banner">
+    SER-CARS İLE YOLA ÇIK<span>KONFORU YAŞA</span>
+  </div>
+
+  <div class="container">
+    <h2 class="section-title">ARAÇ KİRALAMANIN GÜVENİLİR ADRESİ</h2>
+    <h3 class="section-title">NEDEN SER-CARS?</h3>
+    <ul>
+      <li>✔️ Yalnızca bakımlı ve sigortalı araçlar</li>
+      <li>✔️ Zengin model seçeneği</li>
+      <li>✔️ Uygun fiyatlı günlük, haftalık, aylık ve yıllık kiralama</li>
+      <li>✔️ Hızlı teslimat – Şehir içi anında çözüm</li>
+    </ul>
+    <p style="margin-top: 25px;"><strong>İster iş için, ister konfor...<br>Ser-Cars her zaman yanınızda!</strong></p>
+  </div>
+
+  <div class="business-card-section">
+    <img src="kartvizit.jpg" alt="Ser-Cars Kartvizit" class="business-card-image" id="cardImage">
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <img src="kartvizit.jpg" alt="Büyük Kartvizit" id="lightboxImage">
+  </div>
+
+  <div class="contact-section" id="contactSection">
+    <div class="whatsapp-bubble">
+      <a href="https://wa.me/905520225922" style="color: white; text-decoration: none;" target="_blank">
+        💬 Whatsapp
+      </a>
+    </div>
+
+    <div class="contact-info">
+      <h2>İletişim ve Rezervasyon İçin:</h2>
+      <a href="tel:05520225922">📞 Telefon: 0552 022 59 22</a>
+      <a href="https://www.instagram.com/sercars_2022" target="_blank">📷 Instagram: @sercars_2022</a>
+      <a href="mailto:sercars2022@gmail.com">📧 E-Mail: sercars2022@gmail.com</a>
+      <a> 🔧 Servis: 0538 882 8408 </a>
+      <a> 🚨 Yol Yardım: 0537 675 61 66 </a>
+      <a href="https://www.google.com/maps/place/Seyitnizam,..." target="_blank">📍 Adres: Seyitnizam Mah. Demirciler Sitesi 9.Yol NO:67 Zeytinburnu/İSTANBUL</a>
+    </div>
+
+    <img src="sercars-logo.png" alt="Ser-Cars Logo" class="logo">
+  </div>
+
+  <div class="footer">
+    © 2022 Ser-Cars. Tüm hakları saklıdır.
+  </div>
+
+  <script>
+    const cardImage = document.getElementById('cardImage');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const contactTopLeft = document.getElementById('contactTopLeft');
+    const contactSection = document.getElementById('contactSection');
+
+    let isZoomed = false;
+
+    cardImage.addEventListener('click', (e) => {
+      lightbox.style.display = 'flex';
+      isZoomed = true;
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      isZoomed = false;
+      lightboxImage.style.transform = 'scale(1)';
+    });
+
+    lightbox.addEventListener('mousemove', (e) => {
+      if (!isZoomed) return;
+      const rect = lightbox.getBoundingClientRect();
+      let x = (e.clientX - rect.left) / rect.width;
+      let y = (e.clientY - rect.top) / rect.height;
+
+      x = Math.min(Math.max(x, 0.1), 0.9);
+      y = Math.min(Math.max(y, 0.1), 0.9);
+
+      lightboxImage.style.transformOrigin = `${x * 100}% ${y * 100}%`;
+      lightboxImage.style.transform = 'scale(2.5)';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
+      const bgPosX = 50 + (x / windowWidth - 0.5) * 20;
+      const bgPosY = 50 + (y / windowHeight - 0.5) * 10;
+
+      document.body.style.backgroundPosition = `${bgPosX}% ${bgPosY}%`;
+    });
+
+    contactTopLeft.addEventListener('click', () => {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
