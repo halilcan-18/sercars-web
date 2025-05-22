@@ -19,6 +19,7 @@
       transition: background-position 0.1s ease-out;
     }
 
+    /* Banner alanı */
     .banner {
       background-color: rgba(240, 125, 0, 0.85);
       padding: 40px 20px;
@@ -26,10 +27,21 @@
       font-weight: bold;
       color: #fff;
       border-bottom: 5px solid #000;
+      text-shadow:
+        1px 1px 0 #000,
+        2px 2px 0 #444,
+        3px 3px 0 #777;  /* 3D efekt burada */
     }
 
     .banner span {
       display: block;
+      font-weight: bold;
+      font-size: 32px;
+      color: #fff;
+      text-shadow:
+        1px 1px 0 #000,
+        2px 2px 0 #444,
+        3px 3px 0 #777;  /* 3D efekt */
     }
 
     .container {
@@ -38,26 +50,13 @@
       border-radius: 10px;
       max-width: 900px;
       margin: 30px auto;
-      text-shadow:
-        1px 1px 0 #000,
-        2px 2px 0 #000,
-        3px 3px 0 #000;
+      text-shadow: none; /* 3D kaldırıldı */
     }
 
-    h1, h2, h3, p, li, a, span {
-      text-shadow:
-        1px 1px 0 #000,
-        2px 2px 0 #444,
-        3px 3px 0 #777;
-    }
-
-    .car-img {
-      display: none;
-    }
-
-    .section-title {
-      font-size: 26px;
-      margin: 30px 0 15px;
+    /* Başlıklar container içindeyse 3D kaldırıldı */
+    .container h2.section-title,
+    .container h3.section-title {
+      text-shadow: none;
       color: #f07d00;
       font-weight: bold;
     }
@@ -71,6 +70,19 @@
     ul li {
       margin: 10px 0;
       color: #fff;
+      font-weight: 700; /* biraz daha kalın */
+      text-shadow: none; /* 3D kaldırıldı */
+    }
+
+    /* Paragraf altındaki vurgu */
+    .container p strong {
+      font-weight: 800; /* biraz daha kalın */
+      text-shadow: none; /* 3D kaldırıldı */
+      font-size: 1.5rem;
+    }
+
+    .car-img {
+      display: none;
     }
 
     .business-card-section {
@@ -259,7 +271,7 @@
     <h2 class="section-title">ARAÇ KİRALAMANIN GÜVENİLİR ADRESİ</h2>
     <h3 class="section-title">NEDEN SER-CARS?</h3>
     <ul>
-      <li✔️ Yalnızca bakımlı ve sigortalı araçlar</li>
+      <li>✔️ Yalnızca bakımlı ve sigortalı araçlar</li>
       <li>✔️ Zengin model seçeneği</li>
       <li>✔️ Uygun fiyatlı günlük, haftalık, aylık ve yıllık kiralama</li>
       <li>✔️ Hızlı teslimat – Şehir içi anında çözüm</li>
@@ -296,7 +308,7 @@
   </div>
 
   <div class="footer">
-    © 2022 Ser-Cars. Tüm hakları saklıdır.
+    © 2022-2025 Ser-Cars. Tüm hakları saklıdır.
   </div>
 
   <script>
